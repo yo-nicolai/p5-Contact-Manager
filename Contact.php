@@ -47,7 +47,7 @@ class Contact
         $this->phoneNumber = $phoneNumber;
     }
 
-    // Convertit le contact en chaîne de caractères pour l'affichage
+    // Renvoie le contact sous forme de texte pour l'affichage
     public function toString(): string
     {
         return "Contact(id: {$this->id}, name: {$this->name}, email: {$this->email}, phone: {$this->phoneNumber})";
