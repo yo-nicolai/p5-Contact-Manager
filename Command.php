@@ -3,6 +3,7 @@ require_once 'ContactManager.php';
 
 class Command
 {
+    // Affiche la liste de tous les contacts
     public function list(): void
     {
         $contactManager = new ContactManager();
@@ -12,6 +13,7 @@ class Command
         }
     }
 
+    // Affiche les détails d'un contact spécifique par son ID
     public function detail(int $id): void
     {
         $contactManager = new ContactManager();
