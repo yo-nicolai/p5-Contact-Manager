@@ -4,11 +4,18 @@ require_once 'Contact.php';
 
 class ContactManager
 {
+    private PDO $db;
+
+    // Crée la connexion une seule fois, à la création du manager
+    public function __construct()
+    {
+        $this->db = (new DBConnect())->getPDO();
+    }
+    
     public function findAll(): array
     {
-        $pdo = (new DBConnect())->getPDO();
         $sql = 'SELECT * FROM contact';
-        $result = $pdo->query($sql);
+        $result = $this->db->query($sql);
 
         $contacts = [];
         foreach ($result->fetchAll(PDO::FETCH_ASSOC) as $ligne) {
@@ -24,9 +31,8 @@ class ContactManager
 
     public function findById(int $id): ?Contact
     {
-        $pdo = (new DBConnect())->getPDO();
         $sql = 'SELECT * FROM contact WHERE id = :id';
-        $result = $pdo->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->execute(['id' => $id]);
         $ligne = $result->fetch(PDO::FETCH_ASSOC);
 
@@ -44,24 +50,22 @@ class ContactManager
 
     public function create(string $name, string $email, string $phoneNumber): ?Contact
     {
-        $pdo = (new DBConnect())->getPDO();
         $sql = 'INSERT INTO contact (name, email, phone_number) VALUES (:name, :email, :phone_number)';
-        $result = $pdo->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->execute([
             'name' => $name,
             'email' => $email,
             'phone_number' => $phoneNumber,
         ]);
 
-        $id = (int) $pdo->lastInsertId();
+        $id = (int) $this->db->lastInsertId();
         return $this->findById($id);
     }
 
     public function delete(int $id): bool
     {
-        $pdo = (new DBConnect())->getPDO();
         $sql = 'DELETE FROM contact WHERE id = :id';
-        $result = $pdo->prepare($sql);
+        $result = $this->db->prepare($sql);
         $result->execute(['id' => $id]);
         return $result->rowCount() > 0;
     }

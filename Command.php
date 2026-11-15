@@ -3,11 +3,18 @@ require_once 'ContactManager.php';
 
 class Command
 {
+    private ContactManager $contactManager;
+
+    // Crée le manager une seule fois, à la création de Command
+    public function __construct()
+    {
+        $this->contactManager = new ContactManager();
+    }
+
     // Affiche la liste de tous les contacts
     public function list(): void
     {
-        $contactManager = new ContactManager();
-        $contacts = $contactManager->findAll();
+        $contacts = $this->contactManager->findAll();
         foreach ($contacts as $contact) {
             echo $contact->toString() . "\n";
         }
@@ -16,8 +23,7 @@ class Command
     // Affiche les détails d'un contact spécifique par son ID
     public function detail(int $id): void
     {
-        $contactManager = new ContactManager();
-        $contact = $contactManager->findById($id);
+        $contact = $this->contactManager->findById($id);
 
         if (!$contact) {
             echo "Aucun contact avec l'id $id\n";
@@ -30,17 +36,14 @@ class Command
     // Crée un nouveau contact
     public function create(string $name, string $email, string $phoneNumber): void
     {
-        $contactManager = new ContactManager();
-        $contact = $contactManager->create($name, $email, $phoneNumber);
+        $contact = $this->contactManager->create($name, $email, $phoneNumber);
         echo "Contact créé : " . $contact->toString() . "\n";
     }
 
     // Supprime un contact par son ID
     public function delete(int $id): void
     {
-        $contactManager = new ContactManager();
-
-        if ($contactManager->delete($id)) {
+        if ($this->contactManager->delete($id)) {
             echo "Contact $id supprimé\n";
         } else {
             echo "Aucun contact avec l'id $id\n";
