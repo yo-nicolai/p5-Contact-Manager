@@ -1,6 +1,7 @@
 <?php
 require_once 'ContactManager.php';
 
+// Exécute les commandes tapées par l'utilisateur et affiche les résultats
 class Command
 {
     private ContactManager $contactManager;

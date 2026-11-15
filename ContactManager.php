@@ -2,6 +2,7 @@
 require_once 'DBConnect.php';
 require_once 'Contact.php';
 
+// Gère toutes les requêtes à la table contact et transforme les résultats en objets Contact
 class ContactManager
 {
     private PDO $db;
@@ -11,7 +12,8 @@ class ContactManager
     {
         $this->db = (new DBConnect())->getPDO();
     }
-    
+
+    // Renvoie tous les contacts sous forme de tableau d'objets Contact
     public function findAll(): array
     {
         $sql = 'SELECT * FROM contact';
@@ -29,6 +31,7 @@ class ContactManager
         return $contacts;
     }
 
+    // Renvoie le contact correspondant à l'id ou null si inexistant
     public function findById(int $id): ?Contact
     {
         $sql = 'SELECT * FROM contact WHERE id = :id';
@@ -48,6 +51,7 @@ class ContactManager
         return $contact;
     }
 
+    // Ajoute un contact dans la base et renvoie le contact créé
     public function create(string $name, string $email, string $phoneNumber): ?Contact
     {
         $sql = 'INSERT INTO contact (name, email, phone_number) VALUES (:name, :email, :phone_number)';
@@ -62,6 +66,7 @@ class ContactManager
         return $this->findById($id);
     }
 
+    // Supprime le contact correspondant à l'id. Renvoie true si une ligne a été supprimée
     public function delete(int $id): bool
     {
         $sql = 'DELETE FROM contact WHERE id = :id';

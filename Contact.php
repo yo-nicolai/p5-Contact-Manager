@@ -1,5 +1,6 @@
 <?php
 
+// Représente un contact
 class Contact
 {
     private ?int $id = null;
@@ -7,6 +8,7 @@ class Contact
     private ?string $email = null;
     private ?string $phoneNumber = null;
 
+    // Getters et setters pour lire et modifier les attributs
     public function getId(): ?int
     {
         return $this->id;

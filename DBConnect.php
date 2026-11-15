@@ -1,8 +1,10 @@
 <?php
 require_once 'config.php';
 
+// Se connecte à la base de données à partir des identifiants de config.php
 class DBConnect
 {
+    // Renvoie l'objet PDO connecté à la base 
     public function getPDO(): PDO
     {
         try {

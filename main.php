@@ -1,8 +1,10 @@
 <?php
 require_once 'Command.php';
 
+// Crée l'objet qui exécute les commandes
 $command = new Command();
 
+// Boucle infinie qui attend une commande la reconnaît et appelle la bonne méthode de Command
 while (true) {
     $line = readline("Entrez votre commande : ");
     if ($line === "list") {
