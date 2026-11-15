@@ -27,6 +27,14 @@ class Command
         echo $contact->toString() . "\n";
     }
 
+    // Crée un nouveau contact
+    public function create(string $name, string $email, string $phoneNumber): void
+    {
+        $contactManager = new ContactManager();
+        $contact = $contactManager->create($name, $email, $phoneNumber);
+        echo "Contact créé : " . $contact->toString() . "\n";
+    }
+
     // Supprime un contact par son ID
     public function delete(int $id): void
     {
