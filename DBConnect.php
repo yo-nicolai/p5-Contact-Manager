@@ -1,5 +1,5 @@
 <?php
-
+require_once 'config.php';
 
 class DBConnect
 {
@@ -7,9 +7,9 @@ class DBConnect
     {
         try {
             return new PDO(
-                'mysql:host=localhost;dbname=contact_manager;charset=utf8mb4',
-                'root',
-                '',
+                'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+                DB_USER,
+                DB_PASS,
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
         } catch (Exception $e) {
