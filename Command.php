@@ -26,4 +26,16 @@ class Command
 
         echo $contact->toString() . "\n";
     }
+
+    // Supprime un contact par son ID
+    public function delete(int $id): void
+    {
+        $contactManager = new ContactManager();
+
+        if ($contactManager->delete($id)) {
+            echo "Contact $id supprimé\n";
+        } else {
+            echo "Aucun contact avec l'id $id\n";
+        }
+    }
 }

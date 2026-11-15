@@ -41,4 +41,13 @@ class ContactManager
         $contact->setPhoneNumber($ligne['phone_number']);
         return $contact;
     }
+
+    public function delete(int $id): bool
+    {
+        $pdo = (new DBConnect())->getPDO();
+        $sql = 'DELETE FROM contact WHERE id = :id';
+        $result = $pdo->prepare($sql);
+        $result->execute(['id' => $id]);
+        return $result->rowCount() > 0;
+    }
 }

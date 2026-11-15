@@ -9,6 +9,8 @@ while (true) {
         $command->list();
     } else if (preg_match('/^detail (\d+)$/', $line, $matches)) {
         $command->detail($matches[1]);
+    } else if (preg_match('/^delete (\d+)$/', $line, $matches)) {
+        $command->delete($matches[1]);
     } else if ($line === "quit") {
         break;
     }
