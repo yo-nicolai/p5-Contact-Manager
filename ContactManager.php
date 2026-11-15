@@ -21,4 +21,24 @@ class ContactManager
         }
         return $contacts;
     }
+
+    public function findById(int $id): ?Contact
+    {
+        $pdo = (new DBConnect())->getPDO();
+        $sql = 'SELECT * FROM contact WHERE id = :id';
+        $result = $pdo->prepare($sql);
+        $result->execute(['id' => $id]);
+        $ligne = $result->fetch(PDO::FETCH_ASSOC);
+
+        if (!$ligne) {
+            return null;
+        }
+
+        $contact = new Contact();
+        $contact->setId($ligne['id']);
+        $contact->setName($ligne['name']);
+        $contact->setEmail($ligne['email']);
+        $contact->setPhoneNumber($ligne['phone_number']);
+        return $contact;
+    }
 }
