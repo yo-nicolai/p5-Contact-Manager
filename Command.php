@@ -46,4 +46,16 @@ class Command
             echo "Aucun contact avec l'id $id\n";
         }
     }
+
+    // Affiche la liste des commandes disponibles
+    public function help(): void
+    {
+        echo "Commandes disponibles :\n";
+        echo "  list                          : affiche tous les contacts\n";
+        echo "  detail [id]                   : affiche un contact\n";
+        echo "  create [nom], [email], [tel]  : crée un contact\n";
+        echo "  delete [id]                   : supprime un contact\n";
+        echo "  help                          : affiche cette aide\n";
+        echo "  quit                          : quitte le programme\n";
+    }
 }

@@ -13,7 +13,11 @@ while (true) {
         $command->delete($matches[1]);
     } else if (preg_match('/^create ([^,]+), ([^,]+), ([^,]+)$/', $line, $matches)) {
         $command->create($matches[1], $matches[2], $matches[3]);
+    } else if ($line === "help") {
+        $command->help();
     } else if ($line === "quit") {
         break;
+    } else {
+        echo "Commande inconnue. Tapez help pour voir les commandes.\n";
     }
 }
