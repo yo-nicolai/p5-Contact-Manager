@@ -7,5 +7,7 @@ while (true) {
     $line = readline("Entrez votre commande : ");
     if ($line === "list") {
         $command->list();
+    } else if ($line === "quit") {
+        break;
     }
 }
